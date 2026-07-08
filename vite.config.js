@@ -40,5 +40,9 @@ export default defineConfig({
   server: {
     fs: { allow: ['..'] }
   },
-  // For production: copy logos/ and clients/ folders alongside dist/
+  preview: {
+    host: true,
+    port: 8080,
+    allowedHosts: ['psg-website-production.up.railway.app']
+  }
 })
