@@ -223,8 +223,8 @@ export default function Hero() {
     const dpr = window.devicePixelRatio || 1
     const QUANTITY = window.matchMedia('(max-width: 768px)').matches ? 80 : 220
     const BASE_SPEED = 0.6
-    const REPEL_RADIUS = 120
-    const REPEL_FORCE = 3.5
+    const REPEL_RADIUS = 160
+    const REPEL_FORCE = 6
     const FRICTION = 0.92
     const rgb = [61, 107, 71]
     let particles = []
@@ -236,7 +236,7 @@ export default function Hero() {
       w = parent.offsetWidth; h = parent.offsetHeight
       canvas.width = w * dpr; canvas.height = h * dpr
       canvas.style.width = w + 'px'; canvas.style.height = h + 'px'
-      ctx.scale(dpr, dpr)
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       particles = []
       for (let i = 0; i < QUANTITY; i++) particles.push(make())
     }
@@ -274,14 +274,14 @@ export default function Hero() {
     }
     const onMM = e => { const r = canvas.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top }
     const onML = () => { mouse.x = -9999; mouse.y = -9999 }
-    canvas.addEventListener('mousemove', onMM)
-    canvas.addEventListener('mouseleave', onML)
+    document.addEventListener('mousemove', onMM)
+    document.addEventListener('mouseleave', onML)
     window.addEventListener('resize', resize)
     resize(); frame()
     return () => {
       cancelAnimationFrame(rafId)
-      canvas.removeEventListener('mousemove', onMM)
-      canvas.removeEventListener('mouseleave', onML)
+      document.removeEventListener('mousemove', onMM)
+      document.removeEventListener('mouseleave', onML)
       window.removeEventListener('resize', resize)
     }
   }, [])

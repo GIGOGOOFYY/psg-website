@@ -11,8 +11,8 @@ export default function GlobalParticles() {
     const isMobile = window.matchMedia('(max-width: 768px)').matches
     const QUANTITY = isMobile ? 60 : 180
     const BASE_SPEED = 0.45
-    const REPEL_R = 100
-    const REPEL_F = 2.8
+    const REPEL_R = 160
+    const REPEL_F = 6
     const FRICTION = 0.93
     const rgb = [61, 107, 71]
 
@@ -28,7 +28,7 @@ export default function GlobalParticles() {
       canvas.height = h * dpr
       canvas.style.width = w + 'px'
       canvas.style.height = h + 'px'
-      ctx.scale(dpr, dpr)
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0) // absolute — never accumulates
       if (particles.length === 0) {
         for (let i = 0; i < QUANTITY; i++) particles.push(make())
       }
@@ -85,7 +85,7 @@ export default function GlobalParticles() {
       w = window.innerWidth; h = window.innerHeight
       canvas.width = w * dpr; canvas.height = h * dpr
       canvas.style.width = w + 'px'; canvas.style.height = h + 'px'
-      ctx.scale(dpr, dpr)
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
     }
 
     document.addEventListener('mousemove', onMouseMove)
