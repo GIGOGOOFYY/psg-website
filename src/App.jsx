@@ -21,41 +21,40 @@ const MARQUEE_ITEMS = [
 ]
 
 export default function App() {
-  // Cursor glow
+  // Cursor glow — desktop only
   useEffect(() => {
+    if (window.matchMedia('(hover: none)').matches) return // skip touch devices
     const glow = document.createElement('div')
     glow.id = 'cursor-glow'
     document.body.appendChild(glow)
 
-    let mx = 0, my = 0, gx = 0, gy = 0
-    let isHero = false
+    let mx = -999, my = -999, gx = -999, gy = -999
+    let active = false
 
     const onMove = e => {
       mx = e.clientX; my = e.clientY
-      const hero = document.getElementById('morphHero')
-      if (hero) {
-        const r = hero.getBoundingClientRect()
-        isHero = e.clientY >= r.top && e.clientY <= r.bottom
-      }
-      glow.style.opacity = isHero ? '0' : '1'
+      if (!active) { gx = mx; gy = my; active = true }
+      glow.style.opacity = '1'
     }
     const onLeave = () => { glow.style.opacity = '0' }
 
     document.addEventListener('mousemove', onMove)
     document.addEventListener('mouseleave', onLeave)
 
+    let raf
     function animate() {
       gx += (mx - gx) * 0.09
       gy += (my - gy) * 0.09
       glow.style.left = gx + 'px'
       glow.style.top = gy + 'px'
-      requestAnimationFrame(animate)
+      raf = requestAnimationFrame(animate)
     }
     animate()
 
     return () => {
       document.removeEventListener('mousemove', onMove)
       document.removeEventListener('mouseleave', onLeave)
+      cancelAnimationFrame(raf)
       glow.remove()
     }
   }, [])
