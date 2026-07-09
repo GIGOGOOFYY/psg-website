@@ -15,7 +15,7 @@ export default function About() {
 
   return (
     <section className="about" id="about" ref={sectionRef}>
-      <div className="about-bg-num" aria-hidden="true">1969</div>
+      <div className="about-bg-num" aria-hidden="true">{'1969'.split('').map((ch, i) => <span className="bg-letter" key={i}>{ch}</span>)}</div>
       <div className="container">
         <div className="about-grid">
           <div data-reveal style={{display:'flex', flexDirection:'column', gap:'12px'}}>
@@ -48,11 +48,11 @@ export default function About() {
             <p className="body-md">A 3rd generation, family-owned private enterprise that has established itself as a role model in the glass processing industry — locally and globally.</p>
             <div className="about-pillars">
               {[
-                { num: '01', title: 'ISO 9001:2015 Certified', desc: 'Excellent quality, economical cost, and on-time delivery — certified and verified.' },
-                { num: '02', title: 'Local & Global Ambition', desc: 'Committed to continuous improvement and integrity across every market we serve.' },
+                { num: '01', title: 'ISO 9001:2015 Certified', desc: 'Excellent quality, economical cost, and on-time delivery — certified and verified.', id: 'certificates' },
+                { num: '02', title: 'Local & Global Ambition', desc: 'Committed to continuous improvement and integrity across every market we serve.', id: 'quality' },
                 { num: '03', title: 'Sustainable Craftsmanship', desc: 'Customer satisfaction and environmental harmony at the core of every product line.' },
               ].map(p => (
-                <div className="about-pillar" key={p.num}>
+                <div className="about-pillar" key={p.num} id={p.id || undefined}>
                   <div className="about-pillar-num">{p.num}</div>
                   <div>
                     <h4>{p.title}</h4>

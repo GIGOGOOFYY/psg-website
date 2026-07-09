@@ -1,4 +1,32 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+
+const products = [
+  { num: '01', brand: 'Saif Lam', suffix: 'LAM', type: 'Laminated Glass', slug: 'saif-lam' },
+  { num: '02', brand: 'Saif Curve', suffix: 'CURVE', type: 'Bend Tempered Glass', slug: 'saif-curve' },
+  { num: '03', brand: 'Saif Tough', suffix: 'TOUGH', type: 'Tempered Glass', slug: 'saif-tough' },
+  { num: '04', brand: 'Saif Cool', suffix: 'COOL', type: 'Double Glaze Glass', slug: 'saif-cool' },
+]
+
+const clients = [
+  { name: 'Master Motor', img: '/logos/oem/master-motor.png' },
+  { name: 'Daewoo', img: '/logos/oem/daewoo.png' },
+  { name: 'Hino', img: '/logos/oem/hino.png' },
+  { name: 'Higer', img: '/logos/oem/higer.png' },
+  { name: 'Ghandhara', img: '/logos/oem/ghandhara.png' },
+  { name: 'SunLong', img: '/logos/oem/sunlong.png' },
+]
+
+function OemLogo({ client }) {
+  const [failed, setFailed] = useState(false)
+  return (
+    <div className="oem-logo-item">
+      {!failed
+        ? <img src={client.img} alt={client.name} onError={() => setFailed(true)} />
+        : <span className="oem-logo-fallback">{client.name}</span>
+      }
+    </div>
+  )
+}
 
 export default function Automotive() {
   const sectionRef = useRef(null)
@@ -15,60 +43,31 @@ export default function Automotive() {
 
   return (
     <section className="automotive" ref={sectionRef}>
-      <div className="auto-bg-text" aria-hidden="true">Automotive</div>
       <div className="container">
-        <div className="auto-layout">
-          <div className="auto-text" data-reveal>
+
+        {/* Header */}
+        <div className="auto-header" data-reveal>
+          <div>
             <span className="label">Automotive Glass</span>
             <h2 className="heading-lg">Superior Safety,<br />Design &amp; Strength</h2>
-            <p className="body-lg">PSG provides automotive glass — Windscreens, Side and Rear Windows, and Glass Roofs — with superior safety, precision design, and structural strength.</p>
-            <div className="auto-steps">
-              {[
-                { num: '01', title: 'Lamination', desc: 'Safety, sound insulation, and UV protection for enhanced passenger comfort.' },
-                { num: '02', title: 'Bending', desc: 'Precision-engineered curves matching modern vehicle aesthetics and aerodynamics.' },
-                { num: '03', title: 'Tempering', desc: 'Thermally fortified for strength and resilience against impacts and thermal stress.' },
-              ].map(step => (
-                <div className="auto-step" key={step.num}>
-                  <span className="auto-step-num">{step.num}</span>
-                  <div>
-                    <h4>{step.title}</h4>
-                    <p>{step.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
-          <div data-reveal data-delay="200">
-            <div className="auto-data-panel">
-              <div className="auto-data-header">
-                <span>Technical Specifications</span>
-                <div className="auto-data-dots">
-                  <div className="auto-data-dot" style={{ background: '#ef4444' }} />
-                  <div className="auto-data-dot" style={{ background: '#f59e0b' }} />
-                  <div className="auto-data-dot" style={{ background: '#22c55e' }} />
-                </div>
-              </div>
-              <table className="auto-data-table">
-                <thead>
-                  <tr><th>Specification</th><th>Length</th><th>Width</th><th>Height</th></tr>
-                </thead>
-                <tbody>
-                  <tr><td>Max Glass Size</td><td className="val">2800</td><td className="val">1900</td><td className="val">500</td></tr>
-                  <tr><td>Bend Specification</td><td className="val">2800</td><td className="val">1900</td><td className="val">500</td></tr>
-                  <tr><td>Thickness Range</td><td className="val" colSpan="2">4 mm – 19 mm</td><td></td></tr>
-                </tbody>
-              </table>
-              <div className="auto-client-footer">
-                <p>Automotive Clients</p>
-                <div className="auto-client-tags">
-                  {['Master Motor','Daewoo','Hino','Higer','Ghandhara','SunLong'].map(t => (
-                    <span className="auto-tag" key={t}>{t}</span>
-                  ))}
-                </div>
-              </div>
+          <p className="body-lg auto-inline-ghost-wrap">
+            PSG provides{' '}
+            <span className="auto-inline-ghost" aria-hidden="true">{'Automotive'.split('').map((ch, i) => <span className="bg-letter" key={i}>{ch}</span>)}</span>
+            {' '}glass — Windscreens, Side and Rear Windows, and Glass Roofs — with superior safety, precision design, and structural strength.
+          </p>
+        </div>
+
+        {/* OEM Partner logos */}
+        <div className="oem-strip" data-reveal>
+          <span className="oem-strip-label">OEM Partners</span>
+          <div className="oem-marquee-wrap">
+            <div className="oem-marquee-track">
+              {[...clients, ...clients].map((c, i) => <OemLogo key={i} client={c} />)}
             </div>
           </div>
         </div>
+
       </div>
     </section>
   )

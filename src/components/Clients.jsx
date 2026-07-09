@@ -19,22 +19,22 @@ const row1clients = [
 ]
 
 const row2clients = [
-  { name: 'GSK', domain: 'gsk.com' },
-  { name: 'Sanofi', domain: 'sanofi.com' },
-  { name: 'Tetra Pak', domain: 'tetrapak.com' },
-  { name: 'Arif Habib Group', domain: 'arifhabibgroup.com' },
-  { name: 'Beaconhouse', domain: 'beaconhouse.edu.pk' },
-  { name: 'Lucky Textile', domain: 'luckytextile.com.pk' },
-  { name: 'Daewoo', domain: 'daewoo.com' },
-  { name: 'Hino Motors', domain: 'hino.com' },
-  { name: 'Getz Pharma', domain: 'getzpharma.com' },
-  { name: 'ADM', domain: 'adm.com' },
-  { name: 'Master Motor', domain: 'mastermotor.com.pk' },
-  { name: 'Ghandhara Ind.', domain: 'ghandhara.com.pk' },
-  { name: 'Aga Khan Univ.', domain: 'aku.edu' },
-  { name: 'Shan Foods', domain: 'shanfoods.com' },
-  { name: 'Packages Mall', domain: 'packagesmall.com.pk' },
-  { name: 'FFBL', domain: 'ffbl.com' },
+  { name: 'GSK', src: '/clients/GSK.png' },
+  { name: 'Sanofi', src: '/clients/Sanofi.png' },
+  { name: 'Tetra Pak', src: '/clients/Tetra Pak.png' },
+  { name: 'Arif Habib Group', src: '/clients/Arif Habib.png' },
+  { name: 'Beaconhouse', src: '/clients/Beaconhouse.png' },
+  { name: 'Lucky Textile', src: '/clients/Lucky Textile.png' },
+  { name: 'Daewoo', src: '/clients/daewoo.png' },
+  { name: 'Hino Motors', src: '/clients/hino.png' },
+  { name: 'Getz Pharma', src: '/clients/Getz Pharma.png' },
+  { name: 'Glam Gas', src: '/clients/Glam Gas.png' },
+  { name: 'Master Motor', src: '/clients/master-motor.png' },
+  { name: 'Ghandhara Ind.', src: '/clients/ghandhara.png' },
+  { name: 'Aga Khan Univ.', src: '/clients/Aga Khan.png' },
+  { name: 'Shan Foods', src: '/clients/Shan Foods.png' },
+  { name: 'Packages Mall', src: '/clients/Packages Mall.png' },
+  { name: 'FFBL', src: '/clients/FFBL.png' },
 ]
 
 function ClientChip({ name, src, domain }) {
